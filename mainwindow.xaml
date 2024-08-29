@@ -1,0 +1,528 @@
+<Window x:Class="CeleryApp.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:dragablz="clr-namespace:Dragablz;assembly=Dragablz"
+        xmlns:local="clr-namespace:CeleryApp"
+        xmlns:Wpf="clr-namespace:Microsoft.Web.WebView2.Wpf;assembly=Microsoft.Web.WebView2.Wpf"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        Closed="Window_Closed" Loaded="Window_Loaded" x:Name="ActualWindow" Title="Celery" Height="350"
+        Width="672" Icon="/CeleryLogo.ico" WindowStartupLocation="CenterScreen" WindowStyle="None"
+        ShowInTaskbar="true" Background="Transparent" AllowsTransparency="true"
+        ResizeMode="CanResizeWithGrip" HorizontalAlignment="Left" VerticalAlignment="Top">
+  <UIElement.Effect>
+    <DropShadowEffect BlurRadius="12" Direction="140" ShadowDepth="2" Color="#FF343A36"/>
+  </UIElement.Effect>
+  <FrameworkElement.Resources>
+    <Storyboard x:Key="Storyboard1"/>
+    <Storyboard x:Key="Storyboard3"/>
+    <Storyboard x:Key="Editor"/>
+    <Storyboard x:Key="Editor2"/>
+    <Storyboard x:Key="Script"/>
+    <Storyboard x:Key="Script2"/>
+    <Storyboard x:Key="Setting"/>
+    <Storyboard x:Key="Setting2"/>
+    <Style x:Key="FocusVisual">
+      <Setter Property="Control.Template">
+        <Setter.Value>
+          <ControlTemplate>
+            <Rectangle Margin="2" SnapsToDevicePixels="true"
+                       Stroke="{DynamicResource {x:Static JetSystemColors.ControlTextBrushKey}}" StrokeDashArray="1 2"
+                       StrokeThickness="1"/>
+          </ControlTemplate>
+        </Setter.Value>
+      </Setter>
+    </Style>
+    <SolidColorBrush x:Key="Button.Static.Background" Color="#FFDDDDDD"/>
+    <SolidColorBrush x:Key="Button.Static.Border" Color="#FF707070"/>
+    <SolidColorBrush x:Key="Button.Disabled.Background" Color="#FFF4F4F4"/>
+    <SolidColorBrush x:Key="Button.Disabled.Border" Color="#FFADB2B5"/>
+    <SolidColorBrush x:Key="Button.Disabled.Foreground" Color="#FF838383"/>
+    <Style x:Key="ButtonStyle11" TargetType="{x:Type Button}">
+      <Setter Property="FrameworkElement.FocusVisualStyle" Value="{StaticResource FocusVisual}"/>
+      <Setter Property="Control.Background" Value="{StaticResource Button.Static.Background}"/>
+      <Setter Property="Control.BorderBrush" Value="{StaticResource Button.Static.Border}"/>
+      <Setter Property="Control.Foreground"
+              Value="{DynamicResource {x:Static JetSystemColors.ControlTextBrushKey}}"/>
+      <Setter Property="Control.BorderThickness" Value="1"/>
+      <Setter Property="Control.HorizontalContentAlignment" Value="Center"/>
+      <Setter Property="Control.VerticalContentAlignment" Value="Center"/>
+      <Setter Property="Control.Padding" Value="1"/>
+      <Setter Property="Control.Template">
+        <Setter.Value>
+          <ControlTemplate TargetType="{x:Type Button}">
+            <Border x:Name="border" BorderBrush="{TemplateBinding Control.BorderBrush}"
+                    BorderThickness="{TemplateBinding Control.BorderThickness}"
+                    Background="{TemplateBinding Control.Background}" SnapsToDevicePixels="true">
+              <ContentPresenter x:Name="contentPresenter" Focusable="false"
+                                HorizontalAlignment="{TemplateBinding Control.HorizontalContentAlignment}"
+                                Margin="{TemplateBinding Control.Padding}" RecognizesAccessKey="true"
+                                SnapsToDevicePixels="{TemplateBinding UIElement.SnapsToDevicePixels}"
+                                VerticalAlignment="{TemplateBinding Control.VerticalContentAlignment}"/>
+            </Border>
+            <ControlTemplate.Triggers>
+              <Trigger Property="Button.IsDefaulted" Value="true">
+                <Setter TargetName="border" Value="{DynamicResource {x:Static JetSystemColors.HighlightBrushKey}}"
+                        Property="Border.BorderBrush"/>
+              </Trigger>
+              <Trigger Property="UIElement.IsEnabled" Value="false">
+                <Setter TargetName="border" Value="{StaticResource Button.Disabled.Background}"
+                        Property="Border.Background"/>
+                <Setter TargetName="border" Value="{StaticResource Button.Disabled.Border}" Property="Border.BorderBrush"/>
+                <Setter TargetName="contentPresenter" Value="{StaticResource Button.Disabled.Foreground}"
+                        Property="TextElement.Foreground"/>
+              </Trigger>
+            </ControlTemplate.Triggers>
+          </ControlTemplate>
+        </Setter.Value>
+      </Setter>
+    </Style>
+    <Storyboard x:Key="Attach">
+      <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(TextElement.Foreground).(SolidColorBrush.Color)"
+                                    Storyboard.TargetName="label">
+        <EasingColorKeyFrame KeyTime="0:0:0.7" Value="#FF1E4B0E"/>
+      </ColorAnimationUsingKeyFrames>
+      <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(TextElement.Foreground).(SolidColorBrush.Color)"
+                                    Storyboard.TargetName="label1">
+        <EasingColorKeyFrame KeyTime="0:0:0.7" Value="#FF1E4B0E"/>
+      </ColorAnimationUsingKeyFrames>
+      <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Panel.Background).(SolidColorBrush.Color)"
+                                    Storyboard.TargetName="button">
+        <EasingColorKeyFrame KeyTime="0:0:0.7" Value="#28368916"/>
+      </ColorAnimationUsingKeyFrames>
+    </Storyboard>
+    <Storyboard x:Key="Attach2">
+      <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Panel.Background).(SolidColorBrush.Color)"
+                                    Storyboard.TargetName="button">
+        <EasingColorKeyFrame KeyTime="0" Value="#28368916"/>
+        <EasingColorKeyFrame KeyTime="0:0:0.8" Value="#FF151515"/>
+      </ColorAnimationUsingKeyFrames>
+      <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(TextElement.Foreground).(SolidColorBrush.Color)"
+                                    Storyboard.TargetName="label1">
+        <EasingColorKeyFrame KeyTime="0" Value="#FF1E4B0E"/>
+        <EasingColorKeyFrame KeyTime="0:0:0.8" Value="#FF555454"/>
+      </ColorAnimationUsingKeyFrames>
+      <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(TextElement.Foreground).(SolidColorBrush.Color)"
+                                    Storyboard.TargetName="label">
+        <EasingColorKeyFrame KeyTime="0" Value="#FF1E4B0E"/>
+        <EasingColorKeyFrame KeyTime="0:0:0.8" Value="#FF555454"/>
+      </ColorAnimationUsingKeyFrames>
+    </Storyboard>
+    <Image x:Key="ConsoleBtn" Source="Nudes/cmd-icon-9.png"/>
+  </FrameworkElement.Resources>
+  <FrameworkElement.Triggers>
+    <EventTrigger RoutedEvent="FrameworkElement.Loaded"/>
+  </FrameworkElement.Triggers>
+  <Grid KeyDown="Window_KeyDown" MouseDown="Window_Move" MouseUp="Window_MoveFinish" x:Name="MainWindow2"
+        Background="#FF151515" Margin="10,0,0,0.4" RenderTransformOrigin="0.222,0.088">
+    <Grid.RowDefinitions>
+      <RowDefinition Height="82*" MaxHeight="82" MinHeight="82"/>
+      <RowDefinition Height="259*"/>
+    </Grid.RowDefinitions>
+    <Grid.ColumnDefinitions>
+      <ColumnDefinition/>
+    </Grid.ColumnDefinitions>
+    <dragablz:TabablzControl SelectionChanged="TabControlShit_SelectionChanged" x:Name="TabControlShit" Margin="139,81,10.4,14"
+                             BorderBrush="#FF191919" Foreground="White" Background="#FF191919" Height="Auto" Grid.RowSpan="2">
+      <dragablz:TabablzControl.InterTabController>
+        <dragablz:InterTabController/>
+      </dragablz:TabablzControl.InterTabController>
+    </dragablz:TabablzControl>
+    <Border x:Name="MainButtons" CornerRadius="2" BorderBrush="#FF191919" BorderThickness="1" Width="127"
+            Height="25" Margin="7,49,0,0" VerticalAlignment="Top" Background="#FF191919"
+            HorizontalAlignment="Left">
+      <Grid x:Name="G" Margin="-1">
+        <RadioButton Checked="ExecutorCheck_Checked" Unchecked="ExecutorCheck_Unchecked"
+                     Style="{StaticResource Iwannakms2}" HorizontalAlignment="Left" Height="25" VerticalAlignment="Top"
+                     Width="41" FontFamily="/CeleryApp;component/#Material Design Icons" FontSize="17.5" Content="󰅩"
+                     Foreground="#FF555454" Background="#FF191919" Margin="1,0,0,0"/>
+        <RadioButton Checked="GameHubCheck_Checked" Unchecked="GameHubCheck_Unchecked"
+                     Style="{StaticResource Iwannakms2}" HorizontalAlignment="Left" Height="25" VerticalAlignment="Top"
+                     Width="44" FontFamily="/CeleryApp;component/#Material Design Icons" FontSize="17.5"
+                     Margin="42,0,0,0" Content="󰊖" Foreground="#FF555454" Background="#FF191919"/>
+        <RadioButton Checked="SettingsCheck_Checked" Unchecked="SettingsCheck_Unchecked"
+                     Style="{StaticResource Iwannakms2}" HorizontalAlignment="Left" Height="25" VerticalAlignment="Top"
+                     Width="40" FontFamily="/CeleryApp;component/#Material Design Icons" FontSize="17.5"
+                     Margin="86,0,0,0" Content="󰒓" Foreground="#FF555454" Background="#FF191919"/>
+      </Grid>
+    </Border>
+    <TreeView SelectedItemChanged="mainTreeView_SelectedItemChanged" x:Name="mainTreeView" Width="125"
+              Margin="9,81,0,10.8" Background="#FF1E1E1E" Foreground="Gray" BorderThickness="0" FontSize="11"
+              HorizontalAlignment="Left" MinHeight="248" Grid.RowSpan="4"/>
+    <Grid Name="SettingsWindow" Height="246" Width="652" Margin="-701,-271,0,0" Background="#FF151515"
+          HorizontalAlignment="Left" VerticalAlignment="Top" Row="1">
+      <Grid x:Name="Grid1" Width="188" Height="73.6" Margin="5,8,459,165" Background="#FF1D231E">
+        <Label x:Name="Label1" Content="Celery will overlay over any other
+open Application."
+               HorizontalAlignment="Left" Margin="4,37,0,-1" VerticalAlignment="Top" Foreground="#FFD8D8D8"
+               FontFamily="/Misako_UI;component/Fonts/#Poppins Light" FontSize="10" Height="37" Width="160"
+               Background="{x:Null}"/>
+        <CheckBox Checked="TopMostCheck_Checked" Unchecked="TopMostCheck_Unchecked" x:Name="TopMostCheck"
+                  Style="{StaticResource HellWOrld}" Content="Topmost" HorizontalAlignment="Left" Margin="4,8,0,0"
+                  VerticalAlignment="Top" Background="#FF5D5D5D" BorderBrush="#FFA8FFC8" Foreground="#FFBFFFDF"
+                  FontFamily="/Misako_UI;component/Fonts/#Poppins Light"/>
+        <Label Content="Topmost" HorizontalAlignment="Left" Margin="40,11,0,0" VerticalAlignment="Top"
+               Foreground="#FFD8D8D8" FontFamily="/Misako_UI;component/Fonts/#Poppins Light" Height="22"
+               Width="62" Background="{x:Null}"/>
+      </Grid>
+      <Grid x:Name="Grid7" Width="188" Height="68.8" Margin="5,168,459,10" Background="#FF1D231E">
+        <Slider ValueChanged="OpacitySlider_ValueChanged" x:Name="OpacitySlider" HorizontalAlignment="Left"
+                Margin="10,27,0,0" VerticalAlignment="Top" Height="21" Width="114" Foreground="White" Value="1"
+                Maximum="1" Minimum="0.4"/>
+        <Label Content="Opacity" HorizontalAlignment="Left" Margin="10,5,0,0" VerticalAlignment="Top"
+               Foreground="#FFD8D8D8" FontFamily="/Misako_UI;component/Fonts/#Poppins Light" Height="22"
+               Width="63" Background="{x:Null}"/>
+        <Label x:Name="Label7" Content="Sets Celery's Window Opacity." HorizontalAlignment="Left"
+               Margin="10,46,0,0" VerticalAlignment="Top" Foreground="#FFD8D8D8"
+               FontFamily="/Misako_UI;component/Fonts/#Poppins Light" FontSize="10" Height="22" Width="158"
+               Background="{x:Null}"/>
+      </Grid>
+      <Grid x:Name="Grid1_Copy" Width="188" Height="77.6" Margin="5,86,459,83" Background="#FF1D231E">
+        <Label Content="Auto-Attach" HorizontalAlignment="Left" Margin="40,10,0,0" VerticalAlignment="Top"
+               Foreground="#FFD8D8D8" FontFamily="/Misako_UI;component/Fonts/#Poppins Light" Height="22"
+               Width="74" Background="{x:Null}"/>
+        <CheckBox Checked="AutoAttachCheck_Checked" Unchecked="AutoAttachCheck_Unchecked" x:Name="AutoAttachCheck"
+                  Style="{StaticResource HellWOrld}" Content="Topmost" HorizontalAlignment="Left" Margin="4,5,0,0"
+                  VerticalAlignment="Top" FontFamily="/Misako_UI;component/Fonts/#Poppins Light"
+                  Background="#FF5D5D5D" BorderBrush="#FFA8FFC8" Foreground="#FFBFFFDF"/>
+        <Label x:Name="Label1_Copy" Content="Celery will inject as soon as it 
+detects roblox."
+               HorizontalAlignment="Left" Margin="4,39,0,0" VerticalAlignment="Top" Foreground="#FFD8D8D8"
+               FontFamily="/Misako_UI;component/Fonts/#Poppins Light" FontSize="10" Height="37" Width="160"
+               Background="{x:Null}"/>
+      </Grid>
+      <Grid x:Name="Grid4" Visibility="Hidden" Width="188" Height="77.6" Margin="5,8,76,165"
+            Background="#FF1D231E">
+        <Label Content="Experimental Mode" HorizontalAlignment="Left" Margin="40,10,0,0" VerticalAlignment="Top"
+               Foreground="#FFD8D8D8" FontFamily="/Misako_UI;component/Fonts/#Poppins Light" Height="22"
+               Width="124" Background="{x:Null}"/>
+        <CheckBox Checked="ExperimentalCheck_Checked" Unchecked="ExperimentalCheck_Unchecked" x:Name="Check4"
+                  Style="{StaticResource HellWOrld}" Content="Topmost" HorizontalAlignment="Left" Margin="4,5,0,0"
+                  VerticalAlignment="Top" FontFamily="/Misako_UI;component/Fonts/#Poppins Light"
+                  Background="#FF5D5D5D" BorderBrush="#FFA8FFC8" Foreground="#FFBFFFDF"/>
+        <Label x:Name="Label4"
+               Content="Allows your scripts to use potentially
+risky things such as the debug library"
+               HorizontalAlignment="Left" Margin="4,39,0,0" VerticalAlignment="Top" Foreground="#FFD8D8D8"
+               FontFamily="/Misako_UI;component/Fonts/#Poppins Light" FontSize="10" Height="37" Width="174"
+               Background="{x:Null}"/>
+      </Grid>
+      <Grid x:Name="Grid2" Visibility="Hidden" Width="188" Height="77.6" Margin="5,86,76,83"
+            Background="#FF1D231E">
+        <Label Content="Multi Inject" HorizontalAlignment="Left" Margin="40,10,0,0" VerticalAlignment="Top"
+               Foreground="#FFD8D8D8" FontFamily="/Misako_UI;component/Fonts/#Poppins Light" Height="22"
+               Width="124" Background="{x:Null}"/>
+        <CheckBox Checked="IncognitoCheck_Checked" Unchecked="IncognitoCheck_Unchecked" x:Name="Check2"
+                  Style="{StaticResource HellWOrld}" Content="Topmost" HorizontalAlignment="Left" Margin="4,5,0,0"
+                  VerticalAlignment="Top" FontFamily="/Misako_UI;component/Fonts/#Poppins Light"
+                  Background="#FF5D5D5D" BorderBrush="#FFA8FFC8" Foreground="#FFBFFFDF"/>
+        <Label x:Name="Label2" Content="Injects to every open roblox
+process simultaneously"
+               HorizontalAlignment="Left" Margin="4,39,0,0" VerticalAlignment="Top" Foreground="#FFD8D8D8"
+               FontFamily="/Misako_UI;component/Fonts/#Poppins Light" FontSize="10" Height="37" Width="174"
+               Background="{x:Null}"/>
+      </Grid>
+      <Grid x:Name="Grid3" Visibility="Hidden" Width="188" Height="77.6" Margin="5,165,76,8"
+            Background="#FF1D231E">
+        <Label Content="View Packets" HorizontalAlignment="Left" Margin="40,10,0,0" VerticalAlignment="Top"
+               Foreground="#FFD8D8D8" FontFamily="/Misako_UI;component/Fonts/#Poppins Light" Height="22"
+               Width="124" Background="{x:Null}"/>
+        <CheckBox Checked="ViewPacketsCheck_Checked" Unchecked="ViewPacketsCheck_Unchecked" x:Name="Check3"
+                  Style="{StaticResource HellWOrld}" Content="Topmost" HorizontalAlignment="Left" Margin="4,5,0,0"
+                  VerticalAlignment="Top" FontFamily="/Misako_UI;component/Fonts/#Poppins Light"
+                  Background="#FF5D5D5D" BorderBrush="#FFA8FFC8" Foreground="#FFBFFFDF"/>
+        <Label x:Name="Label3" Content="When enabled, the debug console 
+will display outgoing packets."
+               HorizontalAlignment="Left" Margin="4,39,0,0" VerticalAlignment="Top" Foreground="#FFD8D8D8"
+               FontFamily="/Misako_UI;component/Fonts/#Poppins Light" FontSize="10" Height="37" Width="160"
+               Background="{x:Null}"/>
+      </Grid>
+    </Grid>
+    <Grid Name="GameHubWindow" Height="330" Width="652" Margin="-701,320.4,711.4,-391.2"
+          Background="#FF151515" Row="1" HorizontalAlignment="Left" VerticalAlignment="Top">
+      <Grid Width="121" Height="160" Margin="6,6,525,0" Background="#FF272727" VerticalAlignment="Top"
+            HorizontalAlignment="Left">
+        <Label x:Name="EntryName" Content="Infinite Yield" HorizontalAlignment="Left" VerticalAlignment="Top"
+               Foreground="#FFD5D5D5" FontFamily="/CeleryApp;component/Fonts/#Poppins" FontSize="11" Height="22"
+               Margin="0,105,0,0"/>
+        <Label x:Name="EntryCreator" Content="Edge" HorizontalAlignment="Left" Margin="4,123,0,0"
+               VerticalAlignment="Top" Padding="0,0,5,0" FontFamily="/CeleryApp;component/Fonts/#Poppins"
+               FontSize="10">
+          <Control.Foreground>
+            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+              <GradientStop Color="#FF2D6D33" Offset="1"/>
+              <GradientStop Color="#FF29C338"/>
+            </LinearGradientBrush>
+          </Control.Foreground>
+        </Label>
+        <Image RenderOptions.BitmapScalingMode="HighQuality" Source="InfiniteYield.png" Stretch="Fill"
+               Margin="0,0,0,56"/>
+        <Button Click="ExecuteInfYield" Style="{StaticResource kys}" Content="󰐊" HorizontalAlignment="Left"
+                Margin="94,135,0,0" Width="24" Background="#FF191919" Foreground="#FF555454"
+                BorderBrush="#FF151515" FontFamily="/CeleryApp;component/#Material Design Icons" FontSize="20"
+                Height="22" VerticalAlignment="Top"/>
+      </Grid>
+      <Grid Width="121" Height="160" Margin="132,6,399,0" Background="#FF272727" HorizontalAlignment="Left"
+            VerticalAlignment="Top">
+        <Label x:Name="EntryName1" Content="Dex Explorer V2" HorizontalAlignment="Left" VerticalAlignment="Top"
+               Foreground="#FFD5D5D5" FontFamily="/CeleryApp;component/Fonts/#Poppins" FontSize="11" Height="22"
+               Margin="0,105,0,0"/>
+        <Label x:Name="EntryCreator1" Content="Moon - Rasp Pi" HorizontalAlignment="Left" Margin="4,123,0,0"
+               VerticalAlignment="Top" Padding="0,0,5,0" FontFamily="/CeleryApp;component/Fonts/#Poppins"
+               FontSize="10">
+          <Control.Foreground>
+            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+              <GradientStop Color="#FF2D6D33" Offset="1"/>
+              <GradientStop Color="#FF29C338"/>
+            </LinearGradientBrush>
+          </Control.Foreground>
+        </Label>
+        <Image RenderOptions.BitmapScalingMode="HighQuality" Source="DexExplorerV2.PNG" Stretch="Fill"
+               Margin="0,0,0,56"/>
+        <Button Click="ExecuteDexV2" Style="{StaticResource kys}" Content="󰐊" HorizontalAlignment="Left"
+                Height="22" Margin="94,135,0,0" VerticalAlignment="Top" Width="24" Background="#FF191919"
+                Foreground="#FF555454" BorderBrush="#FF151515"
+                FontFamily="/CeleryApp;component/#Material Design Icons" FontSize="20"/>
+      </Grid>
+      <Grid Width="120" Height="160" Margin="258,6,274,0" Background="#FF272727" HorizontalAlignment="Left"
+            VerticalAlignment="Top">
+        <Label x:Name="EntryName2" Content="Unnamed ESP" HorizontalAlignment="Left" VerticalAlignment="Top"
+               Foreground="#FFD5D5D5" FontFamily="/CeleryApp;component/Fonts/#Poppins" FontSize="11" Height="22"
+               Margin="0,105,0,0"/>
+        <Label x:Name="EntryCreator2" Content="ic3w0lf" HorizontalAlignment="Left" Margin="4,123,0,0"
+               VerticalAlignment="Top" Padding="0,0,5,0" FontFamily="/CeleryApp;component/Fonts/#Poppins"
+               FontSize="10">
+          <Control.Foreground>
+            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+              <GradientStop Color="#FF2D6D33" Offset="1"/>
+              <GradientStop Color="#FF29C338"/>
+            </LinearGradientBrush>
+          </Control.Foreground>
+        </Label>
+        <Image RenderOptions.BitmapScalingMode="HighQuality" Source="Unnamed.PNG" Stretch="Fill" Margin="0,0,0,56"/>
+        <Button Click="ExecuteUnnamedEsp" Style="{StaticResource kys}" Content="󰐊" HorizontalAlignment="Left"
+                Height="22" Margin="94,135,0,0" VerticalAlignment="Top" Width="24" Background="#FF191919"
+                Foreground="#FF555454" BorderBrush="#FF151515"
+                FontFamily="/CeleryApp;component/#Material Design Icons" FontSize="20"/>
+      </Grid>
+      <Grid Width="120" Height="160" Margin="384,6,148,0" Background="#FF272727" HorizontalAlignment="Left"
+            VerticalAlignment="Top">
+        <Label x:Name="EntryName3" Content="Dex Explorer V4" HorizontalAlignment="Left" VerticalAlignment="Top"
+               Foreground="#FFD5D5D5" FontFamily="/CeleryApp;component/Fonts/#Poppins" FontSize="11" Height="22"
+               Margin="0,105,0,0"/>
+        <Label x:Name="EntryCreator3" Content="Moon" HorizontalAlignment="Left" Margin="4,123,0,0"
+               VerticalAlignment="Top" Padding="0,0,5,0" FontFamily="/CeleryApp;component/Fonts/#Poppins"
+               FontSize="10">
+          <Control.Foreground>
+            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+              <GradientStop Color="#FF2D6D33" Offset="1"/>
+              <GradientStop Color="#FF29C338"/>
+            </LinearGradientBrush>
+          </Control.Foreground>
+        </Label>
+        <Image RenderOptions.BitmapScalingMode="HighQuality" Source="DexExplorerV4.PNG" Stretch="Fill"
+               Margin="0,0,0,56"/>
+        <Button Click="ExecuteDexV4" Style="{StaticResource kys}" Content="󰐊" HorizontalAlignment="Left"
+                Height="22" Margin="94,135,0,0" VerticalAlignment="Top" Width="24" Background="#FF191919"
+                Foreground="#FF555454" BorderBrush="#FF151515"
+                FontFamily="/CeleryApp;component/#Material Design Icons" FontSize="20"/>
+      </Grid>
+    </Grid>
+    <Grid Name="HomeWindow" HorizontalAlignment="Left" Width="652" Margin="-701,40,0,-4.2"
+          Background="#FF151515" RowSpan="2">
+      <Grid.ColumnDefinitions>
+        <ColumnDefinition Width="652"/>
+      </Grid.ColumnDefinitions>
+      <Label x:Name="WelcomeLabel" Content="Welcome" HorizontalAlignment="Left" Margin="28,42,0,0"
+             VerticalAlignment="Top" Width="138" Foreground="#FFCFCFCF"
+             FontFamily="/CeleryApp;component/Fonts/#Poppins" FontSize="25" Background="{x:Null}"/>
+      <Label x:Name="WelcomeLabel_Copy" Content="NAME" HorizontalAlignment="Left" Margin="158,42,0,0"
+             VerticalAlignment="Top" Width="146" FontFamily="/CeleryApp;component/Fonts/#Poppins" FontSize="25"
+             Background="{x:Null}">
+        <Control.Foreground>
+          <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+            <GradientStop Color="#FF06682A" Offset="1"/>
+            <GradientStop Color="#FF60DC4C"/>
+          </LinearGradientBrush>
+        </Control.Foreground>
+      </Label>
+      <Label x:Name="HomeWelcome" Content="Welcome," HorizontalAlignment="Left" Margin="28,42,0,0"
+             VerticalAlignment="Top" Width="138" Foreground="#FFCFCFCF"
+             FontFamily="/CeleryApp;component/Fonts/#Poppins" FontSize="25" Background="{x:Null}"/>
+      <Grid x:Name="Logos_Copy" HorizontalAlignment="Left" Height="153" Margin="1,116,-1,0"
+            VerticalAlignment="Top" Width="652">
+        <Border BorderThickness="1" CornerRadius="6" HorizontalAlignment="Left" Height="130" Margin="154,0,0,0"
+                VerticalAlignment="Top" Width="170" Background="#FF191919">
+          <Button Click="StartUsingCelery" HorizontalAlignment="Left" Width="170" Height="Auto"
+                  Background="#FF191919" BorderBrush="#FF191919" Foreground="#FF191919" Margin="-1">
+            <Label x:Name="WelcomeLabel_Copy5" Content="Start using Celery" HorizontalAlignment="Left" Width="151"
+                   Foreground="#FF555454" FontFamily="/CeleryApp;component/Fonts/#Poppins" FontSize="14"
+                   RenderTransformOrigin="0.325,-0.088" Height="34" VerticalAlignment="Bottom" Background="{x:Null}"/>
+          </Button>
+        </Border>
+        <Label x:Name="WelcomeLabel_Copy6" Content="󰅩" HorizontalAlignment="Left" VerticalAlignment="Top"
+               Width="45" Foreground="#FF555454" FontFamily="/CeleryApp;component/#Material Design Icons"
+               FontSize="30" Margin="161,12,0,0" Background="{x:Null}"/>
+        <Border BorderThickness="1" CornerRadius="6" HorizontalAlignment="Left" Height="130" Margin="332,0,0,0"
+                VerticalAlignment="Top" Width="170" Background="#FF191919">
+          <Button Click="ReportBugs" HorizontalAlignment="Left" Width="170" Height="Auto" Background="#FF191919"
+                  BorderBrush="#FF191919" Foreground="#FF191919" Margin="-1">
+            <Label x:Name="WelcomeLabel_Copy9" Content="Report Bugs" HorizontalAlignment="Left" Width="151"
+                   Foreground="#FF555454" FontFamily="/CeleryApp;component/Fonts/#Poppins" FontSize="14"
+                   RenderTransformOrigin="0.325,-0.088" Height="34" VerticalAlignment="Bottom" Background="{x:Null}"/>
+          </Button>
+        </Border>
+        <Label x:Name="WelcomeLabel_Copy8" Content="󱢚" VerticalAlignment="Top" Foreground="#FF555454"
+               FontFamily="/CeleryApp;component/#Material Design Icons" FontSize="30" Margin="347,12,266,0"
+               Background="{x:Null}"/>
+      </Grid>
+    </Grid>
+    <Button Click="CloseBtn_Click" x:Name="CloseBtn" Style="{StaticResource kys}" Content=""
+            HorizontalAlignment="Right" Height="26" Margin="0,7,12.4,0" VerticalAlignment="Top" Width="42"
+            Background="#FF151515" Foreground="#FF555454" BorderBrush="#FF151515"
+            FontFamily="/CeleryApp;component/Fonts/#Segoe Fluent Icons" FontSize="15"/>
+    <Button Style="{StaticResource Mommy2}" Content="" HorizontalAlignment="Right" Height="26"
+            Margin="0,7,56.4,0" VerticalAlignment="Top" Width="42" Background="#FF151515"
+            Foreground="#FF555454" BorderBrush="#FF151515"
+            FontFamily="/CeleryApp;component/Fonts/#Segoe Fluent Icons" FontSize="10"/>
+    <Button Click="MinimizeBtrn" Style="{StaticResource Mommy2}" Content="" HorizontalAlignment="Right"
+            Height="26" Margin="0,7,96.4,0" VerticalAlignment="Top" Width="42" Background="#FF151515"
+            Foreground="#FF555454" BorderBrush="#FF151515"
+            FontFamily="/CeleryApp;component/Fonts/#Segoe Fluent Icons" FontSize="13"/>
+    <Image x:Name="CeleryLogo1_Copy" Margin="8,6,0,0" Width="30" Height="30" HorizontalAlignment="Left"
+           VerticalAlignment="Top">
+      <Image.Source>
+        <DrawingImage>
+          <DrawingImage.Drawing>
+            <GeometryDrawing Geometry="M 50.333,44.283 C 51.515,42.744 52.567,41.232 53.507,39.762 L 50.511,35.533 C 50.08,34.925 50.224,34.082 50.832,33.651 51.441,33.22 52.283,33.364 52.714,33.972 L 55.032,37.244 C 56.532,34.628 57.668,32.192 58.528,30.036 L 56.184,26.848 C 55.743,26.247 55.872,25.403 56.473,24.961 57.073,24.521 57.918,24.648 58.36,25.25 L 59.635,26.985 C 60.877,23.17 61.12,20.78 61.125,20.73 61.193,19.988 61.849,19.439 62.591,19.509 63.333,19.576 63.88,20.231 63.814,20.972 63.793,21.204 63.511,24.053 62.011,28.469 L 63.652,28.442 C 64.409,28.403 65.012,29.024 65.024,29.769 65.037,30.515 64.442,31.129 63.697,31.141 L 61.002,31.185 C 60.179,33.23 59.116,35.506 57.752,37.941 L 59.599,37.649 C 60.34,37.534 61.027,38.035 61.143,38.772 61.259,39.508 60.757,40.2 60.02,40.316 L 55.95,40.96 C 54.928,42.571 53.775,44.232 52.473,45.929 52.207,46.275 51.806,46.457 51.401,46.457 51.114,46.457 50.825,46.366 50.58,46.178 49.991,45.722 49.879,44.875 50.333,44.283 M 90.139,54.747 C 89.907,54.897 88.473,55.692 87.054,56.217 87.21,58.284 86.41,60.179 84.767,61.491 82.45,63.34 78.968,63.734 75.653,62.671 75.44,64.055 74.834,65.269 73.866,66.182 71.948,67.994 68.847,68.425 65.132,67.401 64.298,67.171 63.464,66.923 62.629,66.676 59.481,65.742 56.501,64.859 53.458,64.859 53.42,64.859 53.382,64.859 53.345,64.859 53.283,64.867 53.221,64.871 53.158,64.872 49.593,64.915 46.447,68.276 44.151,70.73 42.166,72.85 40.213,75.08 38.324,77.237 34.959,81.08 31.48,85.054 27.629,88.629 25.377,90.72 22.057,93.248 19.033,93.421 18.922,93.427 18.81,93.43 18.699,93.43 15.343,93.43 11.639,90.626 10.107,89.095 10.043,89.031 9.991,88.96 9.939,88.889 9.867,88.837 9.796,88.784 9.731,88.719 8.148,87.136 5.207,83.233 5.405,79.791 5.58,76.765 8.108,73.447 10.197,71.196 13.771,67.346 17.744,63.868 21.586,60.505 23.745,58.616 25.977,56.662 28.097,54.676 30.538,52.389 33.878,49.26 33.954,45.724 33.857,44.137 33.488,42.493 33.052,40.665 32.721,39.287 32.306,37.883 31.906,36.525 31.71,35.861 31.513,35.196 31.324,34.529 29.984,29.775 31.211,27.237 32.476,25.945 33.338,25.065 34.47,24.524 35.759,24.346 34.711,21.04 35.1,17.645 36.93,15.455 38.193,13.943 39.996,13.244 41.967,13.446 42.451,12.079 43.132,10.754 43.144,10.733 44.881,7.79300000000003 48.018,6.22100000000003 51.351,6.63000000000003 54.223,6.98100000000003 56.638,8.68100000000003 58.051,11.196 58.486,10.961 58.938,10.748 59.426,10.589 61.881,9.78900000000003 64.468,10.216 67.111,11.857 72.892,15.446 72.82,21.456 71.694,25.187 73.395,26.271 74.483,28.116 74.585,30.247 74.647,31.55 74.291,33.059 73.351,34.436 74.28,34.176 75.252,34.125 76.237,34.306 78.328,34.686 80.125,36.064 81.116,37.96 89.538,37.028 93.753,41.939 94.443,45.452 95.148,49.065 93.539,52.539 90.139,54.747 M 91.107,46.106 C 90.629,43.676 87.283,40.277 80.334,41.508 79.472,41.662 78.631,41.132 78.398,40.285 78.029,38.944 76.917,37.886 75.63,37.652 74.475,37.44 73.346,37.906 72.387,38.959 72.459,39.481 72.484,40.045 72.434,40.659 72.226,43.253 69.502,46.568 65.938,48.587 L 65.515,49.849 C 67.939,48.949 70.212,48.251 72.276,47.712 L 73.13,44.665 C 73.331,43.948 74.072,43.525 74.794,43.729 75.512,43.93 75.931,44.675 75.73,45.393 L 75.278,47 C 80.37,45.919 83.642,45.865 83.89,45.863 83.894,45.863 83.899,45.863 83.903,45.863 84.642,45.863 85.244,46.458 85.252,47.199 85.26,47.944 84.662,48.554 83.917,48.563 83.86,48.563 80.801,48.619 75.981,49.63 L 77.487,51.422 C 77.967,51.992 77.893,52.844 77.322,53.324 77.069,53.537 76.76,53.641 76.454,53.641 76.069,53.641 75.687,53.477 75.42,53.16 L 73.034,50.323 C 70.832,50.893 68.382,51.647 65.763,52.646 L 68.284,55.789 C 68.75,56.371 68.657,57.221 68.076,57.687 67.827,57.887 67.528,57.984 67.232,57.984 66.836,57.984 66.444,57.811 66.178,57.479 L 63.152,53.706 C 62.073,54.168 60.973,54.668 59.855,55.218 59.664,55.312 59.46,55.356 59.261,55.356 58.762,55.356 58.283,55.079 58.048,54.601 57.719,53.932 57.996,53.122 58.665,52.794 59.876,52.2 61.064,51.659 62.227,51.162 L 62.54,50.228 C 61.694,50.596 60.81,50.97 59.893,51.353 56.911,52.599 53.828,53.888 52.039,55.15 48.781,57.448 48.132,57.959 45.393,60.698 45.277,60.814 33.701,72.402 23.771,82.817 23.437,83.168 22.989,83.344 22.54,83.344 22.119,83.344 21.697,83.188 21.368,82.874 20.688,82.226 20.662,81.15 21.31,80.471 31.236,70.059 42.873,58.408 42.988,58.293 45.883,55.399 46.713,54.745 50.078,52.371 52.171,50.894 55.429,49.533 58.58,48.215 60.727,47.318 62.756,46.469 64.159,45.69 67.163,44.023 68.953,41.497 69.043,40.387 69.211,38.295 68.006,37.573 67.868,37.497 67.29,37.181 66.926,36.549 66.966,35.891 67.006,35.233 67.402,34.647 68.014,34.404 70.082,33.582 71.268,32.089 71.188,30.411 71.126,29.119 70.297,28.056 69.0760000000001,27.701 68.6000000000001,27.563 68.2080000000001,27.223 68.0030000000001,26.771 67.7980000000001,26.319 67.8000000000001,25.801 68.0090000000001,25.351 68.1370000000001,25.072 71.1230000000001,18.351 65.3180000000001,14.747 63.5460000000001,13.647 61.9690000000001,13.345 60.4910000000001,13.82 57.3720000000001,14.827 55.6350000000001,18.972 55.6170000000001,19.014 55.4390000000001,19.447 55.0900000000001,19.788 54.6530000000001,19.956 54.2180000000001,20.124 53.7310000000001,20.106 53.3080000000001,19.904 51.5770000000001,19.073 50.3590000000001,19.116 49.6880000000001,20.028 48.6420000000001,21.451 48.8680000000001,24.653 50.7270000000001,26.652 50.7280000000001,26.653 50.7300000000001,26.655 50.7310000000001,26.656 51.3700000000001,27.344 51.3310000000001,28.418 50.6440000000001,29.058 49.9770000000001,29.679 48.9440000000001,29.661 48.2990000000001,29.031 47.9050000000001,28.821 46.6230000000001,28.75 46.1860000000001,28.875 45.3810000000001,29.119 44.8900000000001,30.08 44.6210000000001,30.842 43.8170000000001,33.118 44.3330000000001,35.808 44.8790000000001,38.655 45.4000000000001,41.373 45.9400000000001,44.185 45.3660000000001,46.927 44.1860000000001,52.56 39.6260000000001,57.189 35.9610000000001,60.907 L 35.2430000000001,61.636 C 32.5190000000001,64.413 19.5000000000001,77.142 18.9480000000001,77.683 18.2770000000001,78.339 17.2000000000001,78.327 16.5440000000001,77.656 15.8880000000001,76.985 15.9000000000001,75.908 16.5710000000001,75.252 16.7060000000001,75.12 30.1170000000001,62.008 32.8160000000001,59.256 L 33.5400000000001,58.521 C 37.0660000000001,54.942 41.0630000000001,50.885 42.0390000000001,46.23 42.4730000000001,44.155 42.0200000000001,41.793 41.5410000000001,39.294 40.9340000000001,36.127 40.3060000000001,32.854 41.4160000000001,29.709 42.1770000000001,27.555 43.4870000000001,26.141 45.2040000000001,25.62 45.4360000000001,25.55 45.7790000000001,25.489 46.1850000000001,25.453 45.3170000000001,22.843 45.5240000000001,19.954 46.9510000000001,18.014 48.3520000000001,16.107 50.6270000000001,15.487 53.2170000000001,16.236 53.6920000000001,15.403 54.4040000000001,14.336 55.3420000000001,13.33 54.3630000000001,11.181 52.4910000000001,10.197 50.9410000000001,10.008 48.9430000000001,9.76499999999997 47.1280000000001,10.68 46.0780000000001,12.457 45.8920000000001,12.817 45.0760000000001,14.857 44.8740000000001,15.535 44.8670000000001,15.711 44.8320000000001,15.889 44.7670000000001,16.063 44.4390000000001,16.938 43.4660000000001,17.383 42.5880000000001,17.063 41.2850000000001,16.584 40.2600000000001,16.776 39.5400000000001,17.638 38.3550000000001,19.055 38.0820000000001,22.242 39.9100000000001,25.354 40.2580000000001,25.947 40.2150000000001,26.69 39.8010000000001,27.239 39.3860000000001,27.787 38.6810000000001,28.032 38.0180000000001,27.86 37.2270000000001,27.656 35.7710000000001,27.443 34.9070000000001,28.326 34.0200000000001,29.232 33.9070000000001,31.158 34.5970000000001,33.608 34.7820000000001,34.26 34.9740000000001,34.912 35.1670000000001,35.564 35.5810000000001,36.964 36.0080000000001,38.411 36.36,39.876 36.8230000000001,41.815 37.247,43.711 37.3530000000001,45.595 37.3550000000001,45.634 37.3560000000001,45.672 37.3550000000001,45.711 37.2950000000001,50.72 33.1590000000001,54.596 30.4210000000001,57.16 28.2590000000001,59.184 26.0050000000001,61.158 23.8260000000001,63.066 20.0490000000001,66.372 16.1430000000001,69.791 12.6890000000001,73.512 10.3410000000001,76.04 8.88700000000005,78.462 8.79900000000005,79.99 8.69800000000005,81.737 10.4520000000001,84.635 12.1340000000001,86.317 12.1980000000001,86.381 12.2500000000001,86.452 12.3020000000001,86.523 12.3740000000001,86.575 12.4450000000001,86.628 12.5100000000001,86.693 14.1920000000001,88.375 17.0530000000001,90.141 18.8370000000001,90.029 20.3630000000001,89.942 22.7840000000001,88.487 25.3140000000001,86.139 29.0360000000001,82.684 32.4570000000001,78.778 35.7640000000001,74.999 37.671,72.821 39.6430000000001,70.568 41.6670000000001,68.408 44.1950000000001,65.706 48,61.64 52.9230000000001,61.478 52.9870000000001,61.469 53.0510000000001,61.464 53.1150000000001,61.463 56.7770000000001,61.387 60.244,62.424 63.5940000000001,63.418 64.408,63.66 65.221,63.901 66.0350000000001,64.126 68.5210000000001,64.812 70.5240000000001,64.662 71.5300000000001,63.713 72.5400000000001,62.759 72.3880000000001,61.212 72.2080000000001,60.375 72.0650000000001,59.714 72.3280000000001,59.031 72.8770000000001,58.636 73.4260000000001,58.24 74.156,58.209 74.7380000000001,58.555 77.8450000000001,60.403 81.0660000000001,60.095 82.6430000000001,58.836 83.6430000000001,58.037 83.9210000000001,56.925 83.4690000000001,55.531 83.18,54.639 83.667,53.682 84.557,53.391 84.708,53.342 84.8620000000001,53.314 85.014,53.308 85.524,53.176 87.183,52.612 88.286,51.896 90.515,50.449 91.542,48.339 91.107,46.106 Z">
+              <GeometryDrawing.Brush>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                  <GradientStop Color="#FF06682A" Offset="1"/>
+                  <GradientStop Color="#FF60DC4C"/>
+                </LinearGradientBrush>
+              </GeometryDrawing.Brush>
+            </GeometryDrawing>
+          </DrawingImage.Drawing>
+        </DrawingImage>
+      </Image.Source>
+    </Image>
+    <Label x:Name="CeleryLogo" Content="Celery" HorizontalAlignment="Left" Margin="40,1,0,0"
+           VerticalAlignment="Top" Width="61" FontFamily="/CeleryApp;component/Fonts/#Poppins"
+           RenderTransformOrigin="-0.649,0.538" Height="29" FontSize="14" Background="{x:Null}">
+      <Control.Foreground>
+        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+          <GradientStop Color="#FF06682A" Offset="1"/>
+          <GradientStop Color="#FF60DC4C"/>
+        </LinearGradientBrush>
+      </Control.Foreground>
+    </Label>
+    <Label x:Name="CeleryLogo1" Content="Unpaid" HorizontalAlignment="Left" Margin="41,19,0,0"
+           VerticalAlignment="Top" Width="41" FontFamily="/CeleryApp;component/Fonts/#Poppins"
+           RenderTransformOrigin="-0.649,0.538" Height="23" FontSize="9" Background="{x:Null}">
+      <Control.Foreground>
+        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+          <GradientStop Color="#FF06682A" Offset="1"/>
+          <GradientStop Color="#FF60DC4C"/>
+        </LinearGradientBrush>
+      </Control.Foreground>
+    </Label>
+    <Button MouseEnter="button_MouseEnter_1" MouseLeave="button_MouseLeave" Click="Inject_Click"
+            x:Name="button" Style="{StaticResource OWODADDY}" HorizontalAlignment="Right" Height="29"
+            Margin="0,5,142.4,0" VerticalAlignment="Top" Width="83" BorderBrush="#FF191919"
+            Background="#FF151515">
+      <Grid Height="25" Width="80">
+        <Button Click="Inject_Click" x:Name="label1" Style="{StaticResource kys}" Content="󰒘"
+                HorizontalAlignment="Left" Height="25" Margin="-3,-1,0,0" VerticalAlignment="Top" Width="25"
+                Background="#00191919" Foreground="#FF555454" BorderBrush="#FF151515"
+                FontFamily="/CeleryApp;component/#Material Design Icons" FontSize="17.5"/>
+        <Label x:Name="label" Content="Attach" VerticalAlignment="Top"
+               FontFamily="/CeleryApp;component/Fonts/#Poppins" Margin="21,-2.5,-0.424,0" Height="28"
+               Background="#00151515" Foreground="#FF555454" FontSize="14"/>
+      </Grid>
+    </Button>
+    <Border x:Name="MainButtons_Copy" Width="162" CornerRadius="2" BorderBrush="#FF191919" BorderThickness="1"
+            Height="29" Margin="0,47,10.4,0" VerticalAlignment="Top" Background="#FF191919"
+            HorizontalAlignment="Right" MinWidth="302" MinHeight="29" Panel.ZIndex="9000">
+      <Grid x:Name="G1" Height="29" Margin="3.2,-0.8,-0.4,-1" Width="298" HorizontalAlignment="Right"
+            VerticalAlignment="Top">
+        <Grid.ColumnDefinitions>
+          <ColumnDefinition Width="3*"/>
+          <ColumnDefinition Width="50*"/>
+          <ColumnDefinition Width="93*"/>
+        </Grid.ColumnDefinitions>
+        <Label Content="|" HorizontalAlignment="Left" Height="31" Margin="53.6,-3,0,0" VerticalAlignment="Top"
+               Width="12" Foreground="#DD767676" FontWeight="Bold" FontSize="18" Grid.Column="2"/>
+        <Button Click="Execute_Click" Style="{StaticResource kys}" Content="󰐊" HorizontalAlignment="Left"
+                Height="25" Margin="28.6,2,0,0" VerticalAlignment="Top" Width="30" Background="#FF191919"
+                Foreground="#FF555454" BorderBrush="#FF151515"
+                FontFamily="/CeleryApp;component/#Material Design Icons" FontSize="22" Grid.Column="1"/>
+        <Button Click="LoadFile_Click" Style="{StaticResource kys}" Content="󰝰" HorizontalAlignment="Left"
+                Height="25" Margin="88.6,2,0,0" VerticalAlignment="Top" Width="30" Background="#FF191919"
+                Foreground="#FF555454" BorderBrush="#FF151515"
+                FontFamily="/CeleryApp;component/#Material Design Icons" FontSize="17.5" Grid.Column="1"
+                Grid.ColumnSpan="2"/>
+        <Button Click="SaveFile_Click" Style="{StaticResource kys}" Content="󰆓" HorizontalAlignment="Left"
+                Height="25" Margin="58.6,2,0,0" VerticalAlignment="Top" Width="30" Background="#FF191919"
+                Foreground="#FF555454" BorderBrush="#FF151515"
+                FontFamily="/CeleryApp;component/#Material Design Icons" FontSize="17.5" Grid.Column="1"/>
+        <Button Click="Clear_Click" Style="{StaticResource kys}" Content="󰁮" HorizontalAlignment="Left"
+                Height="25" Margin="18.6,2,0,0" VerticalAlignment="Top" Width="30" Background="#FF191919"
+                Foreground="#FF555454" BorderBrush="#FF151515"
+                FontFamily="/CeleryApp;component/#Material Design Icons" FontSize="17.5" Grid.Column="2"/>
+        <Button Click="ExecutorCheck_Click" Name="SlideBar" Style="{StaticResource kys}" Content="󱦰"
+                HorizontalAlignment="Left" Height="29" Margin="-3,0,0,0" VerticalAlignment="Top" Width="33"
+                Background="#FF191919" Foreground="#FF555454" BorderBrush="#FF151515"
+                FontFamily="/CeleryApp;component/#Material Design Icons" FontSize="24.5" Grid.ColumnSpan="2"
+                ToolTip="Open the executor bar!"/>
+        <Button Click="NewTab_Click" Style="{StaticResource kys}" Content="󰎜" HorizontalAlignment="Left"
+                Height="25" Margin="70.6,2,0,0" VerticalAlignment="Top" Width="30" Background="#FF191919"
+                Foreground="#FF555454" BorderBrush="#FF151515"
+                FontFamily="/CeleryApp;component/#Material Design Icons" FontSize="17.5" Grid.Column="2"
+                RenderTransformOrigin="0.483,0.52"/>
+        <Button Click="CloseTab_Click" Style="{StaticResource kys}" Content="󱙏" HorizontalAlignment="Left"
+                Height="25" Margin="100.6,2,0,0" VerticalAlignment="Top" Width="30" Background="#FF191919"
+                Foreground="#FF555454" BorderBrush="#FF151515"
+                FontFamily="/CeleryApp;component/#Material Design Icons" FontSize="17.5" Grid.Column="2"/>
+        <Label Content="|" HorizontalAlignment="Left" Height="31" Margin="135.6,-3,0,0" VerticalAlignment="Top"
+               Width="12" Foreground="#DD767676" FontWeight="Bold" FontSize="18" Grid.Column="2"/>
+        <Button Click="OutputButton_Click" x:Name="btnOutput" Style="{StaticResource kys}" Content="≥"
+                HorizontalAlignment="Left" Height="25" Margin="150,0,0,0" VerticalAlignment="Top" Width="30"
+                Background="#FF191919" Foreground="#FF555454" BorderBrush="#FF151515" FontFamily="Consolas"
+                FontSize="22" Grid.Column="2" FontWeight="Bold"/>
+      </Grid>
+    </Border>
+    <Border x:Name="NotificationBorder" BorderThickness="1" CornerRadius="3" HorizontalAlignment="Left"
+            Height="27" Margin="112,-52,0,0" VerticalAlignment="Top" Width="27" Background="#FF212121"
+            Visibility="Hidden"/>
+    <Image x:Name="NotificationIcon" Margin="115,-51,526.4,111.6" OpacityMask="#FF363636"
+           HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="Hidden" Height="21" Width="21">
+      <Image.Source>
+        <DrawingImage>
+          <DrawingImage.Drawing>
+            <GeometryDrawing Geometry="M 21.25,0 L 2.75,0 C 1.233,0 0,1.233 0,2.75 L 0,21.25 C 0,22.767 1.233,24 2.75,24 L 21.25,24 C 22.767,24 24,22.767 24,21.25 L 24,2.75 C 24,1.233 22.767,0 21.25,0 Z">
+              <GeometryDrawing.Brush>
+                <LinearGradientBrush>
+                  <GradientStop Color="#FF383838"/>
+                </LinearGradientBrush>
+              </GeometryDrawing.Brush>
+            </GeometryDrawing>
+          </DrawingImage.Drawing>
+        </DrawingImage>
+      </Image.Source>
+    </Image>
+    <Label x:Name="ExclamationMark" VerticalContentAlignment="Top" Content="!" HorizontalAlignment="Left"
+           VerticalAlignment="Top" Width="15" FontFamily="/CeleryApp;component/Fonts/#Poppins"
+           Margin="111,-59,0,0" Height="28" Background="#00000000" Foreground="#FFA4A4A4" FontWeight="Bold"
+           FontSize="14" Opacity="0" Visibility="Hidden"/>
+    <Label x:Name="NotificationText" VerticalContentAlignment="Top" HorizontalAlignment="Left"
+           VerticalAlignment="Top" Width="282" FontFamily="/CeleryApp;component/Fonts/#Poppins" Height="26"
+           Background="#00000000" Foreground="#FFA4A4A4" Margin="138,6,0,0" FontSize="11" Opacity="0"/>
+    <Grid x:Name="OutputWindow" Margin="138,0,10,-166" Background="#FF212121" Height="110" ZIndex="1000"
+          VerticalAlignment="Bottom" MinHeight="100" Row="2" RowSpan="2" ColumnSpan="2">
+      <ListView SelectionChanged="outputList_SelectionChanged" x:Name="outputList" Margin="0,0,0,10"
+                Panel.ZIndex="5" MinWidth="514" MinHeight="100" Height="100" VerticalAlignment="Bottom"
+                FontFamily="Verdana" Background="#FF1E1E1E"/>
+    </Grid>
+  </Grid>
+</Window>

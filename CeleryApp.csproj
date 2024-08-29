@@ -1,0 +1,164 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <!--Project was exported from assembly: C:\Users\brady\Downloads\Celery\CeleryApp.exe-->
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{0088E784-0133-4CB1-A8C7-14BA8954A8AF}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AssemblyName>CeleryApp</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <ApplicationVersion>1.0.0.0</ApplicationVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Dragablz">
+      <HintPath>lib\Dragablz.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Web.WebView2.Core">
+      <HintPath>lib\Microsoft.Web.WebView2.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Web.WebView2.Wpf">
+      <HintPath>lib\Microsoft.Web.WebView2.Wpf.dll</HintPath>
+    </Reference>
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+    <Reference Include="System" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xaml" />
+    <Reference Include="WindowsBase" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="_003CModule_003E.cs" />
+    <Compile Include="FileHelp.cs" />
+    <Compile Include="Imports.cs" />
+    <Compile Include="Util.cs" />
+    <Compile Include="CeleryApp_ProcessedByFody.cs" />
+    <Compile Include="ManualMapApi\MapInject.cs" />
+    <Compile Include="CeleryApp\MainWindow.cs" />
+    <Compile Include="CeleryApp\Animation.cs" />
+    <Compile Include="CeleryApp\WebViewA.cs" />
+    <Compile Include="CeleryApp\Types.cs" />
+    <Compile Include="CeleryApp\NotificationApi.cs" />
+    <Compile Include="CeleryApp\Splash.cs" />
+    <Compile Include="CeleryApp\App.cs" />
+    <Compile Include="CeleryApp\Properties\Settings.cs" />
+    <Compile Include="CeleryApp\Properties\Resources.cs" />
+    <Compile Include="CeleryApp\Misc\Miscellaneous.cs" />
+    <Compile Include="CeleryApp\CeleryAPI\Loader.cs" />
+    <Compile Include="CeleryApp\CeleryAPI\Updates.cs" />
+    <Compile Include="EyeStepPackage\OP_TYPES.cs" />
+    <Compile Include="EyeStepPackage\EyeStep.cs" />
+    <Compile Include="Injector\InjectionStatus.cs" />
+    <Compile Include="Injector\WindowsPlayer.cs" />
+    <Compile Include="Injector\MsStorePlayer.cs" />
+    <Compile Include="Costura\AssemblyLoader.cs" />
+    <Compile Include="AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="celerylogo.ico" />
+    <Resource Include="celerylogo.png" />
+    <Resource Include="dexexplorerv2.png" />
+    <Resource Include="dexexplorerv4.png" />
+    <Resource Include="fonts\poppins-black.ttf" />
+    <Resource Include="fonts\poppins-blackitalic.ttf" />
+    <Resource Include="fonts\poppins-bold.ttf" />
+    <Resource Include="fonts\poppins-bolditalic.ttf" />
+    <Resource Include="fonts\poppins-extrabold.ttf" />
+    <Resource Include="fonts\poppins-extrabolditalic.ttf" />
+    <Resource Include="fonts\poppins-extralight.ttf" />
+    <Resource Include="fonts\poppins-extralightitalic.ttf" />
+    <Resource Include="fonts\poppins-italic.ttf" />
+    <Resource Include="fonts\poppins-light.ttf" />
+    <Resource Include="fonts\poppins-lightitalic.ttf" />
+    <Resource Include="fonts\poppins-medium.ttf" />
+    <Resource Include="fonts\poppins-mediumitalic.ttf" />
+    <Resource Include="fonts\poppins-regular.ttf" />
+    <Resource Include="fonts\poppins-semibold.ttf" />
+    <Resource Include="fonts\poppins-semibolditalic.ttf" />
+    <Resource Include="fonts\poppins-thin.ttf" />
+    <Resource Include="fonts\poppins-thinitalic.ttf" />
+    <Resource Include="fonts\segoe_002520fluent_002520icons.ttf" />
+    <Resource Include="infiniteyield.png" />
+    <Resource Include="materialdesignicons-webfont.ttf" />
+    <Resource Include="nudes\bg.png" />
+    <Resource Include="nudes\cmd-icon-9.png" />
+    <Resource Include="nudes\dexexplorerv2.png" />
+    <Resource Include="nudes\file.png" />
+    <Resource Include="nudes\infiniteyield.png" />
+    <Resource Include="nudes\unnamed.png" />
+    <Resource Include="scriptlist\1folder.ico" />
+    <Resource Include="scriptlist\2folder.ico" />
+    <Resource Include="scriptlist\file.ico" />
+    <Resource Include="scriptlist\folder_96px.png" />
+    <Resource Include="scriptlist\lua.png" />
+    <Resource Include="scriptlist\txt.ico" />
+    <Resource Include="unnamed.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="CeleryApp\Properties\Resources.resx" />
+    <EmbeddedResource Include="costura.metadata" />
+    <EmbeddedResource Include="costura\ar-dz\materialdesignextensions\resources\dll.compressed" />
+    <EmbeddedResource Include="costura\betterfolderbrowser\dll.compressed" />
+    <EmbeddedResource Include="costura\costura\dll.compressed" />
+    <EmbeddedResource Include="costura\costura\pdb.compressed" />
+    <EmbeddedResource Include="costura\cs\materialdesignextensions\resources\dll.compressed" />
+    <EmbeddedResource Include="costura\cs-cz\materialdesignextensions\resources\dll.compressed" />
+    <EmbeddedResource Include="costura\de\materialdesignextensions\resources\dll.compressed" />
+    <EmbeddedResource Include="costura\dragablz\dll.compressed" />
+    <EmbeddedResource Include="costura\dragablz\pdb.compressed" />
+    <EmbeddedResource Include="costura\fr\materialdesignextensions\resources\dll.compressed" />
+    <EmbeddedResource Include="costura\fr-fr\materialdesignextensions\resources\dll.compressed" />
+    <EmbeddedResource Include="costura\materialdesigncolors\dll.compressed" />
+    <EmbeddedResource Include="costura\materialdesigncolors\pdb.compressed" />
+    <EmbeddedResource Include="costura\materialdesignextensions\dll.compressed" />
+    <EmbeddedResource Include="costura\materialdesignthemes\wpf\dll.compressed" />
+    <EmbeddedResource Include="costura\materialdesignthemes\wpf\pdb.compressed" />
+    <EmbeddedResource Include="costura\microsoft\web\webview2\core\dll.compressed" />
+    <EmbeddedResource Include="costura\microsoft\web\webview2\winforms\dll.compressed" />
+    <EmbeddedResource Include="costura\microsoft\web\webview2\wpf\dll.compressed" />
+    <EmbeddedResource Include="costura\microsoft\xaml\behaviors\dll.compressed" />
+    <EmbeddedResource Include="costura\microsoft\xaml\behaviors\pdb.compressed" />
+    <EmbeddedResource Include="costura\pt\materialdesignextensions\resources\dll.compressed" />
+    <EmbeddedResource Include="costura\pt-br\materialdesignextensions\resources\dll.compressed" />
+    <EmbeddedResource Include="costura\ru\materialdesignextensions\resources\dll.compressed" />
+    <EmbeddedResource Include="costura\ru-ru\materialdesignextensions\resources\dll.compressed" />
+    <EmbeddedResource Include="costura\system\diagnostics\diagnosticsource\dll.compressed" />
+    <EmbeddedResource Include="costura\uz-latn-uz\materialdesignextensions\resources\dll.compressed" />
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="app.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="mainwindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="splash.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>
