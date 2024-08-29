@@ -1,0 +1,6 @@
+C:\Users\alex2\Downloads\CelerySource-main\CelerySource-main\obj\Debug\CeleryApp.csproj.AssemblyReference.cache
+C:\Users\alex2\Downloads\CelerySource-main\CelerySource-main\obj\Debug\app.g.cs
+C:\Users\alex2\Downloads\CelerySource-main\CelerySource-main\obj\Debug\mainwindow.g.cs
+C:\Users\alex2\Downloads\CelerySource-main\CelerySource-main\obj\Debug\splash.g.cs
+C:\Users\alex2\Downloads\CelerySource-main\CelerySource-main\obj\Debug\CeleryApp_MarkupCompile.cache
+C:\Users\alex2\Downloads\CelerySource-main\CelerySource-main\obj\Debug\CeleryApp_MarkupCompile.lref
